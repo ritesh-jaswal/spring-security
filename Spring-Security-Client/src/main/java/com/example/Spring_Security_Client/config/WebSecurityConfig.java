@@ -2,6 +2,7 @@ package com.example.Spring_Security_Client.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -26,9 +27,13 @@ public class WebSecurityConfig
                         .requestMatchers("/resetPassword**").permitAll()
                         .requestMatchers("/savePassword**").permitAll()
                         .requestMatchers("/changePassword").permitAll()
-                        .requestMatchers("/register").permitAll()// Permit all requests to white-listed URLs
-                        .anyRequest().authenticated()  // Require authentication for all other requests
-                );
+                        .requestMatchers("/register").permitAll() // Permit all requests to white-listed URLs
+                        .requestMatchers("/api/**").authenticated() // Require authentication for requests
+                )
+                .oauth2Login(oauth2Login -> oauth2Login
+                        .loginPage("/oauth2/authorization/api-client-oidc")
+                )
+                .oauth2Client(Customizer.withDefaults());
         return http.build();
     }
 

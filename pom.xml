@@ -17,6 +17,8 @@
 
     <modules>
         <module>Spring-Security-Client</module>
+        <module>Oauth-Authorization-Server</module>
+        <module>Oauth-Resource-Server</module>
     </modules>
 
 </project>
