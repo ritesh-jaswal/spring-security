@@ -23,6 +23,9 @@ public class WebSecurityConfig
                         .requestMatchers("/hello").permitAll()
                         .requestMatchers("/verifyRegistration**").permitAll()
                         .requestMatchers("/resendVerifyToken**").permitAll()
+                        .requestMatchers("/resetPassword**").permitAll()
+                        .requestMatchers("/savePassword**").permitAll()
+                        .requestMatchers("/changePassword").permitAll()
                         .requestMatchers("/register").permitAll()// Permit all requests to white-listed URLs
                         .anyRequest().authenticated()  // Require authentication for all other requests
                 );
